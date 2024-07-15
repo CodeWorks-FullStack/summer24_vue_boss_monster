@@ -14,6 +14,8 @@ const heroes = computed(() => AppState.heroes)
 
 const boss = computed(() => AppState.boss)
 
+const healingItems = computed(() => AppState.healingItems)
+
 // NOTE computed values can calculate things for us and return them, and if a variable's value changes that is used within the computed, it will rerun
 const totalDamage = computed(() => {
   let totalDamageFromHeroes = 0
@@ -88,13 +90,13 @@ onMounted(() => {
 
     <div class="row my-2">
       <div class="col-12">
-        <div class="bg-dark border border-light border-1 shadow-lg rounded text-light px-4">
+        <div class="bg-dark border border-light border-1 shadow-lg rounded text-light px-4 py-2">
           <p>Shop</p>
-          <div class="d-flex gap-2 align-items-center mb-3">
-            <p class="mb-0">Potion: 100</p>
+          <div v-for="healingItem in healingItems" :key="healingItem.name" class="d-flex gap-2 align-items-center mb-3">
+            <p class="mb-0" :title="`Heal all party members for ${healingItem.healingValue}`">{{ healingItem.name }}: {{
+              healingItem.price }}</p>
             <button class="btn btn-outline-light">Purchase</button>
           </div>
-          <p>Super Potion: 500</p>
         </div>
       </div>
     </div>
