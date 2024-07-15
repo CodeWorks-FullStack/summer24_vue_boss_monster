@@ -1,5 +1,6 @@
 import { reactive } from 'vue'
 import { Hero } from './models/Hero.js'
+import { Boss } from './models/Boss.js'
 
 // NOTE AppState is a reactive object to contain app level data
 export const AppState = reactive({
@@ -25,5 +26,14 @@ export const AppState = reactive({
       health: 50
     }),
   ],
-  gold: 0
+  gold: 0,
+  /** @type {Boss} the big boss*/
+  boss: new Boss({
+    name: 'Jake Overall',
+    level: 10,
+    health: 100,
+    damage: 5,
+    gold: 100,
+    imgUrl: 'https://em-content.zobj.net/source/microsoft-teams/363/dragon_1f409.png'
+  })
 })
