@@ -17,6 +17,8 @@ const boss = computed(() => AppState.boss)
 
 const healingItems = computed(() => AppState.healingItems)
 
+const gold = computed(() => AppState.gold)
+
 // NOTE computed values can calculate things for us and return them, and if a variable's value changes that is used within the computed, it will rerun
 const totalDamage = computed(() => {
   let totalDamageFromHeroes = 0
@@ -101,9 +103,12 @@ onMounted(() => {
             <p class="mb-0" :title="`Heal all party members for ${healingItem.healingValue}`">{{ healingItem.name }}: {{
               healingItem.price }}</p>
             <!-- NOTE in vue you can pass entire objects as arguments from the HTML -->
-            <button @click="purchaseHealingItem(healingItem)" class="btn btn-outline-light">
+            <!-- NOTE v-if only renders the html if the supplied statement is truthy -->
+            <button v-if="gold >= healingItem.price" @click="purchaseHealingItem(healingItem)"
+              class="btn btn-outline-light">
               Purchase
             </button>
+            <div v-else>You poor, dawg</div>
           </div>
         </div>
       </div>
