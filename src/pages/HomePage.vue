@@ -5,6 +5,7 @@ import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import { bossesService } from '../services/BossesService.js';
 import { heroesService } from '../services/HeroesService.js';
+import Pop from '../utils/Pop.js';
 
 // NOTE computed allows us to wrap properties from the appstate with a watchable object
 // NOTE computed takes in a function as an argument that must return a value
@@ -28,12 +29,16 @@ function attackBoss() {
 
 function attackHeroes() {
   heroesService.attackHeroes()
+  if (heroes.value.every(hero => hero.health == 0)) {
+    // Pop.error("YOU LOSE")
+    console.error("YOU LOSE PAL")
+  }
 }
 
 // NOTE onMounted is a lifecycle hook that will execute a callback function when this component (page) is rendered to the DOM
 onMounted(() => {
   // console.log('on mounted is running!');
-  setInterval(attackHeroes, 3000)
+  setInterval(attackHeroes, 1000)
 })
 </script>
 
@@ -48,7 +53,8 @@ onMounted(() => {
         <div class="bg-dark border border-light border-1 shadow-lg rounded text-light px-4">
           <div class="text-center">
             <!-- NOTE : before an attribute binds that attribute to a javascript value -->
-            <img :src="hero.imgUrl" :alt="hero.name" class="hero-img">
+            <!-- NOTE { grayscale: hero.health == 0 } the key of the object is applied as a class if the value is truthy -->
+            <img :src="hero.imgUrl" :alt="hero.name" class="hero-img" :class="{ grayscale: hero.health == 0 }">
           </div>
           <!-- NOTE pulls out each hero's name and dumps it into the HTML -->
           <!-- NOTE use {{}} to display javascript as text -->
@@ -86,5 +92,9 @@ onMounted(() => {
 <style scoped lang="scss">
 .hero-img {
   height: 20vh;
+}
+
+.grayscale {
+  filter: grayscale(1);
 }
 </style>
