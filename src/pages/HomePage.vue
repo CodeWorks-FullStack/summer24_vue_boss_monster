@@ -1,9 +1,10 @@
 <!-- NOTE js goes here -->
 <!-- NOTE controller for home page -->
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import { bossesService } from '../services/BossesService.js';
+import { heroesService } from '../services/HeroesService.js';
 
 // NOTE computed allows us to wrap properties from the appstate with a watchable object
 // NOTE computed takes in a function as an argument that must return a value
@@ -24,6 +25,16 @@ const totalDamage = computed(() => {
 function attackBoss() {
   bossesService.attackBoss()
 }
+
+function attackHeroes() {
+  heroesService.attackHeroes()
+}
+
+// NOTE onMounted is a lifecycle hook that will execute a callback function when this component (page) is rendered to the DOM
+onMounted(() => {
+  // console.log('on mounted is running!');
+  setInterval(attackHeroes, 3000)
+})
 </script>
 
 <!-- NOTE html goes here -->
