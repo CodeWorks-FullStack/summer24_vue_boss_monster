@@ -10,6 +10,12 @@ class BossesService {
     })
     boss.health -= totalDamageFromHeroes
     if (boss.health <= 0) boss.health = 0
+    if (boss.health == 0) {
+      AppState.gold += boss.gold
+      boss.level++
+      boss.health = boss.maxHealth * boss.level
+      boss.gold += boss.gold * Math.ceil(boss.level * (Math.random() * 10))
+    }
   }
 }
 
