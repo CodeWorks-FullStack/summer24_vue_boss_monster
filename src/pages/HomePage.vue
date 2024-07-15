@@ -5,8 +5,6 @@ import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import { bossesService } from '../services/BossesService.js';
 import { heroesService } from '../services/HeroesService.js';
-import Pop from '../utils/Pop.js';
-import { healingItemsService } from '../services/HealingItemsService.js';
 
 // NOTE computed allows us to wrap properties from the appstate with a watchable object
 // NOTE computed takes in a function as an argument that must return a value
@@ -14,10 +12,6 @@ import { healingItemsService } from '../services/HealingItemsService.js';
 const heroes = computed(() => AppState.heroes)
 
 const boss = computed(() => AppState.boss)
-
-const healingItems = computed(() => AppState.healingItems)
-
-const gold = computed(() => AppState.gold)
 
 // NOTE computed values can calculate things for us and return them, and if a variable's value changes that is used within the computed, it will rerun
 const totalDamage = computed(() => {
@@ -34,14 +28,6 @@ function attackBoss() {
 
 function attackHeroes() {
   heroesService.attackHeroes()
-  // if (heroes.value.every(hero => hero.health == 0)) {
-  //   // Pop.error("YOU LOSE")
-  //   console.error("YOU LOSE PAL")
-  // }
-}
-
-function purchaseHealingItem(healingItem) {
-  healingItemsService.purchaseHealingItem(healingItem)
 }
 
 // NOTE onMounted is a lifecycle hook that will execute a callback function when this component (page) is rendered to the DOM
@@ -97,20 +83,7 @@ onMounted(() => {
 
     <div class="row my-2">
       <div class="col-12">
-        <div class="bg-dark border border-light border-1 shadow-lg rounded text-light px-4 py-2">
-          <p>Shop</p>
-          <div v-for="healingItem in healingItems" :key="healingItem.name" class="d-flex gap-2 align-items-center mb-3">
-            <p class="mb-0" :title="`Heal all party members for ${healingItem.healingValue}`">{{ healingItem.name }}: {{
-              healingItem.price }}</p>
-            <!-- NOTE in vue you can pass entire objects as arguments from the HTML -->
-            <!-- NOTE v-if only renders the html if the supplied statement is truthy -->
-            <button v-if="gold >= healingItem.price" @click="purchaseHealingItem(healingItem)"
-              class="btn btn-outline-light">
-              Purchase
-            </button>
-            <div v-else>You poor, dawg</div>
-          </div>
-        </div>
+        <ShopComponent />
       </div>
     </div>
   </div>
