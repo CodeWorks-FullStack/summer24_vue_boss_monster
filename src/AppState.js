@@ -1,6 +1,7 @@
 import { reactive } from 'vue'
 import { Hero } from './models/Hero.js'
 import { Boss } from './models/Boss.js'
+import { HealingItem } from './models/HealingItem.js'
 
 // NOTE AppState is a reactive object to contain app level data
 export const AppState = reactive({
@@ -38,5 +39,19 @@ export const AppState = reactive({
     damage: 5,
     gold: 100,
     imgUrl: 'https://em-content.zobj.net/source/microsoft-teams/363/dragon_1f409.png'
-  })
+  }),
+
+  /** @type {HealingItem[]} healing items*/
+  healingItems: [
+    new HealingItem({
+      name: 'Potion',
+      healingValue: 10,
+      price: 100
+    }),
+    new HealingItem({
+      name: 'Super Potion',
+      healingValue: 100,
+      price: 1000
+    })
+  ]
 })

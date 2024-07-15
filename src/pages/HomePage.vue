@@ -85,6 +85,19 @@ onMounted(() => {
         </div>
       </div>
     </div>
+
+    <div class="row my-2">
+      <div class="col-12">
+        <div class="bg-dark border border-light border-1 shadow-lg rounded text-light px-4">
+          <p>Shop</p>
+          <div class="d-flex gap-2 align-items-center mb-3">
+            <p class="mb-0">Potion: 100</p>
+            <button class="btn btn-outline-light">Purchase</button>
+          </div>
+          <p>Super Potion: 500</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
