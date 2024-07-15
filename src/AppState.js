@@ -19,6 +19,11 @@ export const AppState = reactive({
       imgUrl: 'https://em-content.zobj.net/source/microsoft-teams/363/llama_1f999.png',
       health: 10
     }),
+    new Hero({
+      name: 'Ben',
+      imgUrl: 'https://em-content.zobj.net/source/microsoft-teams/363/hippopotamus_1f99b.png',
+      health: 50
+    }),
   ],
   gold: 0
 })
