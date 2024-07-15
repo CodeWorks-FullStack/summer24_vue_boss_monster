@@ -18,7 +18,7 @@ const boss = computed(() => AppState.boss)
 const totalDamage = computed(() => {
   let totalDamageFromHeroes = 0
   heroes.value.forEach(hero => {
-    totalDamageFromHeroes += hero.damage * Math.ceil(hero.level * .06)
+    totalDamageFromHeroes += hero.damage * Math.ceil(hero.level * 1.06)
   })
   return totalDamageFromHeroes
 })
