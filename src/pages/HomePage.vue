@@ -6,6 +6,7 @@ import { AppState } from '../AppState.js';
 import { bossesService } from '../services/BossesService.js';
 import { heroesService } from '../services/HeroesService.js';
 import Pop from '../utils/Pop.js';
+import { healingItemsService } from '../services/HealingItemsService.js';
 
 // NOTE computed allows us to wrap properties from the appstate with a watchable object
 // NOTE computed takes in a function as an argument that must return a value
@@ -31,10 +32,14 @@ function attackBoss() {
 
 function attackHeroes() {
   heroesService.attackHeroes()
-  if (heroes.value.every(hero => hero.health == 0)) {
-    // Pop.error("YOU LOSE")
-    console.error("YOU LOSE PAL")
-  }
+  // if (heroes.value.every(hero => hero.health == 0)) {
+  //   // Pop.error("YOU LOSE")
+  //   console.error("YOU LOSE PAL")
+  // }
+}
+
+function purchaseHealingItem(healingItem) {
+  healingItemsService.purchaseHealingItem(healingItem)
 }
 
 // NOTE onMounted is a lifecycle hook that will execute a callback function when this component (page) is rendered to the DOM
@@ -95,7 +100,10 @@ onMounted(() => {
           <div v-for="healingItem in healingItems" :key="healingItem.name" class="d-flex gap-2 align-items-center mb-3">
             <p class="mb-0" :title="`Heal all party members for ${healingItem.healingValue}`">{{ healingItem.name }}: {{
               healingItem.price }}</p>
-            <button class="btn btn-outline-light">Purchase</button>
+            <!-- NOTE in vue you can pass entire objects as arguments from the HTML -->
+            <button @click="purchaseHealingItem(healingItem)" class="btn btn-outline-light">
+              Purchase
+            </button>
           </div>
         </div>
       </div>
