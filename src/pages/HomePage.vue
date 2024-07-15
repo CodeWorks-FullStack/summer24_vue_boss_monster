@@ -5,10 +5,21 @@ import { computed } from 'vue';
 import { AppState } from '../AppState.js';
 import { bossesService } from '../services/BossesService.js';
 
-// NOTE computed allows us wrap properties from the appstate with a watchable object
+// NOTE computed allows us to wrap properties from the appstate with a watchable object
+// NOTE computed takes in a function as an argument that must return a value
+// NOTE ()=> AppState.heroes is an implied return, ()=>{return AppState.heroes} is an explicit return
 const heroes = computed(() => AppState.heroes)
 
 const boss = computed(() => AppState.boss)
+
+// NOTE computed values can calculate things for us and return them, and if a variable's value changes that is used within the computed, it will rerun
+const totalDamage = computed(() => {
+  let totalDamageFromHeroes = 0
+  heroes.value.forEach(hero => {
+    totalDamageFromHeroes += hero.damage * Math.ceil(hero.level * .06)
+  })
+  return totalDamageFromHeroes
+})
 
 function attackBoss() {
   bossesService.attackBoss()
@@ -48,7 +59,8 @@ function attackBoss() {
       <div class="col-12 col-md-6">
         <div class="bg-dark border border-light border-1 shadow-lg rounded text-light px-4">
           <div class="text-center">
-            <img @click="attackBoss()" :src="boss.imgUrl" :alt="boss.name" role="button" :title="`Attack ${boss.name}`">
+            <img @click="attackBoss()" :src="boss.imgUrl" :alt="boss.name" role="button"
+              :title="`Attack ${boss.name} for a total of ${totalDamage}`">
           </div>
           <p class="fs-2 text-center">
             {{ boss.name }} | {{ boss.health }}

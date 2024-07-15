@@ -13,17 +13,20 @@ export const AppState = reactive({
     new Hero({
       name: 'Oslo',
       imgUrl: 'https://em-content.zobj.net/source/microsoft-teams/363/orangutan_1f9a7.png',
-      health: 25
+      health: 25,
+      damage: 2
     }),
     new Hero({
       name: 'Quetzalcoatllama',
       imgUrl: 'https://em-content.zobj.net/source/microsoft-teams/363/llama_1f999.png',
-      health: 10
+      health: 10,
+      damage: 5
     }),
     new Hero({
       name: 'Ben',
       imgUrl: 'https://em-content.zobj.net/source/microsoft-teams/363/hippopotamus_1f99b.png',
-      health: 50
+      health: 50,
+      damage: 1
     }),
   ],
   gold: 0,
