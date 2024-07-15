@@ -5,7 +5,7 @@ import { computed } from 'vue';
 import { AppState } from '../AppState.js';
 import { bossesService } from '../services/BossesService.js';
 
-// NOTE computed allows us to bring in properties from the appstate and attach listeners to them
+// NOTE computed allows us wrap properties from the appstate with a watchable object
 const heroes = computed(() => AppState.heroes)
 
 const boss = computed(() => AppState.boss)
