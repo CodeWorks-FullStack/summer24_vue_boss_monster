@@ -5,6 +5,7 @@ import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import { bossesService } from '../services/BossesService.js';
 import { heroesService } from '../services/HeroesService.js';
+import ShopComponent from '../components/ShopComponent.vue';
 
 // NOTE computed allows us to wrap properties from the appstate with a watchable object
 // NOTE computed takes in a function as an argument that must return a value
@@ -83,6 +84,7 @@ onMounted(() => {
 
     <div class="row my-2">
       <div class="col-12">
+        <!-- NOTE brings in all code form ShopComponent.vue and injects into the HTML -->
         <ShopComponent />
       </div>
     </div>

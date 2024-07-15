@@ -20,6 +20,7 @@ function increaseCounter() {
     <Navbar />
   </header>
   <main>
+    <!-- NOTE loads components from the router.js file and injects them here -->
     <router-view />
   </main>
   <footer class="bg-dark text-light">

@@ -7,9 +7,9 @@ function loadPage(page) {
 
 const routes = [
   {
-    path: '/',
+    path: '/', // when there is nothing in the url after localhost:8080
     name: 'Home',
-    component: loadPage('HomePage')
+    component: loadPage('HomePage') // load this page into <router-view> tag in App.vue
   },
   {
     path: '/about',
